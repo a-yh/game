@@ -33,6 +33,12 @@
   font-weight: 600;
 }
 
+.guessTitlePlayer {
+  margin-right: 20px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
 .bottomAppBar {
   top: auto;
   bottom: 0;
@@ -57,4 +63,10 @@
 .hintTitle {
   border-radius: 2px !important;
   font-weight: 500;
+}
+
+.giveUp {
+  color: gray;
+  text-decoration: underline;
+  font-size: 8px;
 }

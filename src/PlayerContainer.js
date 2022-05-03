@@ -116,6 +116,10 @@ const PlayerContainer = () => {
     if (checkFirst && checkLast) setIsWinner(true);
   };
 
+  const giveUpHandler = () => {
+    setGuessesLeft(0);
+  };
+
   useEffect(() => {
     fetchPerson();
   }, []);
@@ -187,7 +191,7 @@ const PlayerContainer = () => {
             alignItems={"center"}
             width="100%"
           >
-            <Box className="guessTitle">{"name that wsl player"}</Box>
+            <Box className="guessTitlePlayer">{"name that wsl player"}</Box>
             <Box>
               <Chip
                 label={guessesLeft}
@@ -248,6 +252,9 @@ const PlayerContainer = () => {
             {guessesLeft > 0 && !isWinner && (
               <Box width="100%">
                 <form onSubmit={(e) => guessHandler(e)} className="form">
+                  <Typography className="giveUp" onClick={giveUpHandler}>
+                    Give Up
+                  </Typography>
                   <TextField
                     fullWidth
                     label="enter guess"
