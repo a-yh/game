@@ -256,6 +256,7 @@ const PlayerContainer = () => {
                     Give Up
                   </Typography>
                   <TextField
+                    autoComplete="new-password"
                     fullWidth
                     label="enter guess"
                     variant="outlined"
