@@ -41,11 +41,7 @@ const PlayerContainer = () => {
 
   const fetchPerson = async () => {
     const randNum = Math.floor(Math.random() * (198 + 1));
-    // const ebData = await db("PLAYER").return().limit(1).offset(randNum).all();
-    const ebData = await db("PLAYER")
-      .return()
-      .where({ displayOrder: 14 })
-      .all();
+    const ebData = await db("PLAYER").return().limit(1).offset(randNum).all();
     if (ebData.length) {
       const data = ebData[0];
       setEasybaseData(data);
