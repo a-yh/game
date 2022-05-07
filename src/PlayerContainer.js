@@ -280,6 +280,8 @@ const PlayerContainer = () => {
                     helperText={errorText}
                     id="guess"
                     InputProps={{
+                      autocomplete: "off",
+                      autoComplete: "no",
                       endAdornment: (
                         <InputAdornment position="end">
                           <Button type="submit" color="primary">
