@@ -9,18 +9,18 @@ import {
   Toolbar,
   LinearProgress,
   InputAdornment,
-  BottomNavigation,
   Chip,
 } from "@material-ui/core";
 import Footer from "./Footer";
 import "./Actor.css";
 import moment from "moment";
 import PlayerPostDialog from "./PlayerPostDialog";
-import ActorPreDialog from "./ActorPreDialog";
 import axios from "axios";
 
 const PlayerContainer = () => {
   const GUESSES = 5;
+  const START_DATE = moment("2022-05-07", "YYYY-MM-DD");
+  const NUM_ENTRIES = 198;
   const [easybaseData, setEasybaseData] = useState([]);
   const [firstNameAnswer, setFirstNameAnswer] = useState([]);
   const [lastNameAnswer, setLastNameAnswer] = useState([]);
@@ -35,13 +35,17 @@ const PlayerContainer = () => {
   const [errorText, setErrorText] = useState("");
   const [isWinner, setIsWinner] = useState(false);
   const [openPost, setOpenPost] = useState(false);
-  const [openPre, setOpenPre] = useState(true);
 
   const { db } = useEasybase();
 
   const fetchPerson = async () => {
-    const randNum = Math.floor(Math.random() * (198 + 1));
-    const ebData = await db("PLAYER").return().limit(1).offset(randNum).all();
+    const randNum = Math.floor(Math.random() * (NUM_ENTRIES + 1));
+    const displayOrder =
+      moment.duration(moment().startOf("day").diff(START_DATE)).asDays() + 1;
+    const ebData =
+      displayOrder > NUM_ENTRIES
+        ? await db("PLAYER").return().limit(1).offset(randNum).all()
+        : await db("PLAYER").return().where({ displayOrder }).all();
     if (ebData.length) {
       const data = ebData[0];
       setEasybaseData(data);
@@ -59,7 +63,6 @@ const PlayerContainer = () => {
           .split("")
           .map((l, i) => (i === 0 ? l : "-"))
       );
-      //   const years = moment().diff(data.dob, "years");
       setHints([
         {
           title: "reveal squad (2022)",
@@ -241,7 +244,7 @@ const PlayerContainer = () => {
                 {firstNameGuess.map((letter) => (
                   <Box
                     className={
-                      firstNameAnswer.length > 7 || lastNameAnswer.length > 7
+                      firstNameAnswer.length > 8 || lastNameAnswer.length > 8
                         ? "smallLetter letter"
                         : "letter"
                     }
@@ -254,7 +257,7 @@ const PlayerContainer = () => {
                 {lastNameGuess.map((letter) => (
                   <Box
                     className={
-                      firstNameAnswer.length > 7 || lastNameAnswer.length > 7
+                      firstNameAnswer.length > 8 || lastNameAnswer.length > 8
                         ? "smallLetter letter"
                         : "letter"
                     }
