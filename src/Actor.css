@@ -9,6 +9,11 @@
   font-weight: 600;
 }
 
+.smallLetter {
+  width: 10px;
+  height: 12px;
+}
+
 .appBar {
   margin-bottom: 15px;
 }
@@ -57,7 +62,9 @@
 
 .hintChip {
   border-radius: 6px !important;
-  margin: 10px !important;
+  margin: 8px auto !important;
+  margin-top: 10px;
+  max-width: 250px;
 }
 
 .hintTitle {
